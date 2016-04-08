@@ -19663,14 +19663,18 @@
 
 	var React = __webpack_require__(1);
 	var Grid = __webpack_require__(160);
+	var characters = __webpack_require__(162);
 
 	var MasterBox = React.createClass({
 	  displayName: 'MasterBox',
 
 
 	  getInitialState: function getInitialState() {
-	    return { characters: [], opponentCharacter: null, won: false };
+	    console.log(characters);
+	    return { characters: characters, opponentCharacter: null, won: false };
 	  },
+
+	  componentDidMount: function componentDidMount() {},
 
 	  render: function render() {
 	    return React.createElement(
@@ -19681,7 +19685,7 @@
 	        null,
 	        'Master Box'
 	      ),
-	      React.createElement(Grid, null)
+	      React.createElement(Grid, { characters: this.state.characters })
 	    );
 	  }
 	});
@@ -19706,7 +19710,7 @@
 	    var cards = [1, 2, 3, 4, 5, 6];
 
 	    var cardList = cards.map(function (card, index) {
-	      return React.createElement(Card, null);
+	      return React.createElement(Card, { characteristics: this.props.character });
 	    });
 
 	    return React.createElement(
@@ -19742,6 +19746,64 @@
 	});
 
 	module.exports = Card;
+
+/***/ },
+/* 162 */
+/***/ function(module, exports) {
+
+	[{
+	   "characters": [
+	      {
+	         "name": "Rick",
+	         "gender": "m",
+	         "hairColor": "brown",
+	         "glasses": false,
+	         "imageUrl": "rick.jpg"
+	      },
+	      {
+	         "name": "Keith",
+	         "gender": "m",
+	         "hairColor": "brown",
+	         "glasses": false ,
+	         "imageUrl": "keith.jpg" 
+	      },
+	      {
+	         "name": "Beth",
+	         "gender": "f",
+	         "hairColor": "red",
+	         "glasses": false,
+	         "imageUrl": "beth.jpg" 
+	      },
+	      {
+	         "name": "Valerie",
+	         "gender": "f",
+	         "hairColor": "purple",
+	         "glasses": true,
+	         "imageUrl": "val.jpg"   
+	      },
+	      {
+	         "name": "Jay",
+	         "gender": "m",
+	         "hairColor": "brown",
+	         "glasses": false,
+	         "imageUrl": "jay.jpg"    
+	      },
+	      {
+	         "name": "Sandy",
+	         "gender": "m",
+	         "hairColor": "black",
+	         "glasses": true,
+	         "imageUrl": "sandy.jpg"    
+	      },
+	      {
+	         "name": "Leigh-Anne",
+	         "gender": "f",
+	         "hairColor": "blonde",
+	         "glasses": true,
+	         "imageUrl": "leigh-anne.jpg"    
+	      }
+	   ]
+	}]
 
 /***/ }
 /******/ ]);

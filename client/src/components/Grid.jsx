@@ -11,7 +11,7 @@ var Grid = React.createClass({
 
     var cardList = cards.map(function(card, index){
       return(
-        <Card></Card>
+        <Card characteristics={this.props.character}></Card>
       );
     })
 

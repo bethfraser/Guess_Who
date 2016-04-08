@@ -1,10 +1,10 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var CountriesBox = require('./components/CountriesBox.jsx');
+var MasterBox = require('./components/MasterBox.jsx');
 
 window.onload = function(){
   ReactDOM.render(
-    <CountriesBox></CountriesBox>,
+    <MasterBox></MasterBox>,
     document.getElementById('app')
   );
 }

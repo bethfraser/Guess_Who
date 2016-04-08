@@ -19687,7 +19687,10 @@
 	    };
 
 	    request.send(null);
+	    chooseCharacter();
 	  },
+
+	  chooseCharacter: function chooseCharacter() {},
 
 	  render: function render() {
 	    return React.createElement(
@@ -19750,11 +19753,7 @@
 
 	  render: function render() {
 
-	    return React.createElement(
-	      'div',
-	      null,
-	      'I am a card.'
-	    );
+	    return React.createElement('div', null);
 	  }
 	});
 

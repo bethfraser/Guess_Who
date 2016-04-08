@@ -18,6 +18,11 @@ var MasterBox = React.createClass({
       }
 
       request.send(null);
+      chooseCharacter();
+  },
+
+  chooseCharacter: function(){
+
   },
 
   render: function(){

@@ -6,7 +6,7 @@ var Card = React.createClass({
 
     return(
       <div>
-      I am a card.
+        
       </div>
       )
   }

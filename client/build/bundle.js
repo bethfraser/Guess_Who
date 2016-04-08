@@ -19793,11 +19793,12 @@
 	
 	  buttonClick: function buttonClick(e) {
 	    var chosenCharacter = document.getElementById("guessCharacter").value;
+	    var winAnswer = document.getElementById("winAnswer");
 	
 	    if (this.props.winChecker.checkForWin(chosenCharacter, this.props.opponentCharacter)) {
-	      console.log("Win!!");
+	      winAnswer.innerText = "You win!!";
 	    } else {
-	      console.log("Try AGAIN");
+	      winAnswer.innerText = "Wrong, try again.";
 	    }
 	  },
 	
@@ -19823,7 +19824,8 @@
 	        "button",
 	        { onClick: this.buttonClick },
 	        "Guess!"
-	      )
+	      ),
+	      React.createElement("span", { id: "winAnswer" })
 	    );
 	  }
 	});
@@ -19861,12 +19863,30 @@
 	
 	
 	  questionButtonClick: function questionButtonClick(e) {
-	    var chosenOption = document.getElementById("questionSelect").value;
+	    var chosenOption = document.getElementById("optionSelect").value;
+	    var chosenCharacteristic = document.getElementById("questionSelect").value;
 	    var answer = document.getElementById("answer");
-	    if (chosenOption === this.props.opponentCharacter.hairColor) {
+	    if (chosenOption === String(this.props.opponentCharacter[chosenCharacteristic])) {
 	      answer.innerText = "Yes!";
 	    } else {
 	      answer.innerText = "No.";
+	    }
+	  },
+	
+	  populateSelectOptions: function populateSelectOptions() {
+	    var selectedCharacteristic = document.getElementById("questionSelect").value;
+	    var optionSelect = document.getElementById("optionSelect");
+	    var answer = document.getElementById("answer");
+	    answer.innerText = "";
+	
+	    if (selectedCharacteristic == "hairColor") {
+	      optionSelect.innerHTML = "<option value='brown'>Brown</option><option value='blonde'>Blonde</option><option value='red'>Red</option><option value='black'>Black</option><option value='purple'>Purple</option>";
+	    } else if (selectedCharacteristic == "glasses") {
+	      optionSelect.innerHTML = "<option value='true'>Yes</option><option value='false'>No</option>";
+	    } else if (selectedCharacteristic == "gender") {
+	      optionSelect.innerHTML = "<option value='m'>Male</option><option value='f'>Female</option>";
+	    } else {
+	      optionSelect.innerHTML = "<option>Choose an option:</option>";
 	    }
 	  },
 	
@@ -19878,31 +19898,35 @@
 	      "Guess a characteristic:",
 	      React.createElement(
 	        "select",
-	        { id: "questionSelect" },
+	        { id: "questionSelect", onChange: this.populateSelectOptions },
 	        React.createElement(
 	          "option",
-	          { value: "brown" },
-	          "Brown hair"
+	          null,
+	          "Choose characteristic:"
 	        ),
 	        React.createElement(
 	          "option",
-	          { value: "blonde" },
-	          "Blonde hair"
+	          { value: "hairColor" },
+	          "Hair colour"
 	        ),
 	        React.createElement(
 	          "option",
-	          { value: "red" },
-	          "Red hair"
+	          { value: "glasses" },
+	          "Glasses"
 	        ),
 	        React.createElement(
 	          "option",
-	          { value: "purple" },
-	          "Purple hair"
-	        ),
+	          { value: "gender" },
+	          "Gender"
+	        )
+	      ),
+	      React.createElement(
+	        "select",
+	        { id: "optionSelect" },
 	        React.createElement(
 	          "option",
-	          { value: "black" },
-	          "Black hair"
+	          null,
+	          "Choose an option:"
 	        )
 	      ),
 	      React.createElement(

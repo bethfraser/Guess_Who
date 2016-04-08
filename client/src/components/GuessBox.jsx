@@ -4,12 +4,13 @@ var GuessBox = React.createClass({
 
   buttonClick: function(e){
     var chosenCharacter = document.getElementById("guessCharacter").value;
+    var winAnswer = document.getElementById("winAnswer");
 
     if(this.props.winChecker.checkForWin(chosenCharacter, this.props.opponentCharacter)){
-        console.log("Win!!");
+      winAnswer.innerText = "You win!!";
     }
     else{
-      console.log("Try AGAIN");
+      winAnswer.innerText = "Wrong, try again.";
     }
 
   },
@@ -28,6 +29,7 @@ var GuessBox = React.createClass({
       {dropDownOptions}
       </select>
       <button onClick={this.buttonClick}>Guess!</button>
+      <span id="winAnswer"></span>
       </div>
       )
   }

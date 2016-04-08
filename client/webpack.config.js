@@ -18,7 +18,7 @@ config = {
         }
       }
     ]
-  }
+  },
   devtool: "source-map"
 }
 

@@ -18,8 +18,8 @@ var Grid = React.createClass({
     var cardList = cards.map(function(card, index){
       return(
         <Card characteristics={testCard} key={index}></Card>
-      );
-    })
+        )
+    }.bind(this))
 
 
 

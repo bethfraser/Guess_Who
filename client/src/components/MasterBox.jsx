@@ -1,18 +1,24 @@
 var React = require('react');
 var Grid = require('./Grid.jsx');
-// var characters = require('json!../data/characters.json');
+var characters = require('json!../data/characters.json');
 
 var MasterBox = React.createClass({
 
   getInitialState: function(){
-
     return { characters: [], opponentCharacter: null, won: false };
   },
 
   componentDidMount: function(){
-    // console.log(characters);
-    // var data = characters;
-    // this.setState({characters: data})
+      var request = new XMLHttpRequest();
+      request.open('GET', this.props.url);
+      request.onload = function(){
+        if(request.stats === 200){
+          var characters = JSON.parse(request.responseText);
+          this.setState({characters: characters});
+        }
+      }
+
+      request.send(null);
   },
 
   render: function(){

@@ -51,7 +51,7 @@
 	var MasterBox = __webpack_require__(159);
 
 	window.onload = function () {
-	  ReactDOM.render(React.createElement(MasterBox, null), document.getElementById('app'));
+	  ReactDOM.render(React.createElement(MasterBox, { url: '/api/characters' }), document.getElementById('app'));
 	};
 
 /***/ },
@@ -7953,6 +7953,10 @@
 	  }
 	};
 
+	function registerNullComponentID() {
+	  ReactEmptyComponentRegistry.registerNullComponentID(this._rootNodeID);
+	}
+
 	var ReactEmptyComponent = function (instantiate) {
 	  this._currentElement = null;
 	  this._rootNodeID = null;
@@ -7961,7 +7965,7 @@
 	assign(ReactEmptyComponent.prototype, {
 	  construct: function (element) {},
 	  mountComponent: function (rootID, transaction, context) {
-	    ReactEmptyComponentRegistry.registerNullComponentID(rootID);
+	    transaction.getReactMountReady().enqueue(registerNullComponentID, this);
 	    this._rootNodeID = rootID;
 	    return ReactReconciler.mountComponent(this._renderedComponent, rootID, transaction, context);
 	  },
@@ -18684,7 +18688,7 @@
 
 	'use strict';
 
-	module.exports = '0.14.7';
+	module.exports = '0.14.8';
 
 /***/ },
 /* 147 */
@@ -19663,18 +19667,27 @@
 
 	var React = __webpack_require__(1);
 	var Grid = __webpack_require__(160);
-	var characters = __webpack_require__(162);
 
 	var MasterBox = React.createClass({
 	  displayName: 'MasterBox',
 
 
 	  getInitialState: function getInitialState() {
-	    console.log(characters);
-	    return { characters: characters, opponentCharacter: null, won: false };
+	    return { characters: [], opponentCharacter: null, won: false };
 	  },
 
-	  componentDidMount: function componentDidMount() {},
+	  componentDidMount: function componentDidMount() {
+	    var request = new XMLHttpRequest();
+	    request.open('GET', this.props.url);
+	    request.onload = function () {
+	      if (request.stats === 200) {
+	        var characters = JSON.parse(request.responseText);
+	        this.setState({ characters: characters });
+	      }
+	    };
+
+	    request.send(null);
+	  },
 
 	  render: function render() {
 	    return React.createElement(
@@ -19710,8 +19723,8 @@
 	    var cards = [1, 2, 3, 4, 5, 6];
 
 	    var cardList = cards.map(function (card, index) {
-	      return React.createElement(Card, { characteristics: this.props.character });
-	    });
+	      return React.createElement(Card, { character: this.props.character });
+	    }.bind(this));
 
 	    return React.createElement(
 	      'div',
@@ -19746,64 +19759,6 @@
 	});
 
 	module.exports = Card;
-
-/***/ },
-/* 162 */
-/***/ function(module, exports) {
-
-	[{
-	   "characters": [
-	      {
-	         "name": "Rick",
-	         "gender": "m",
-	         "hairColor": "brown",
-	         "glasses": false,
-	         "imageUrl": "rick.jpg"
-	      },
-	      {
-	         "name": "Keith",
-	         "gender": "m",
-	         "hairColor": "brown",
-	         "glasses": false ,
-	         "imageUrl": "keith.jpg" 
-	      },
-	      {
-	         "name": "Beth",
-	         "gender": "f",
-	         "hairColor": "red",
-	         "glasses": false,
-	         "imageUrl": "beth.jpg" 
-	      },
-	      {
-	         "name": "Valerie",
-	         "gender": "f",
-	         "hairColor": "purple",
-	         "glasses": true,
-	         "imageUrl": "val.jpg"   
-	      },
-	      {
-	         "name": "Jay",
-	         "gender": "m",
-	         "hairColor": "brown",
-	         "glasses": false,
-	         "imageUrl": "jay.jpg"    
-	      },
-	      {
-	         "name": "Sandy",
-	         "gender": "m",
-	         "hairColor": "black",
-	         "glasses": true,
-	         "imageUrl": "sandy.jpg"    
-	      },
-	      {
-	         "name": "Leigh-Anne",
-	         "gender": "f",
-	         "hairColor": "blonde",
-	         "glasses": true,
-	         "imageUrl": "leigh-anne.jpg"    
-	      }
-	   ]
-	}]
 
 /***/ }
 /******/ ]);

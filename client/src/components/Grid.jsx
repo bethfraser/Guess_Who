@@ -7,13 +7,11 @@ var Grid = React.createClass({
 
     var cards = [1, 2, 3, 4, 5, 6];
 
-  
-
     var cardList = cards.map(function(card, index){
       return(
-        <Card characteristics={this.props.character}></Card>
+        <Card character={this.props.character}></Card>
       );
-    })
+    }.bind(this))
 
 
 

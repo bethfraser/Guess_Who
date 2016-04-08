@@ -19680,17 +19680,20 @@
 	    var request = new XMLHttpRequest();
 	    request.open('GET', this.props.url);
 	    request.onload = function () {
-	      if (request.stats === 200) {
+	      if (request.status === 200) {
 	        var characters = JSON.parse(request.responseText);
-	        this.setState({ characters: characters });
+	        this.setState({ characters: characters[0].characters });
+	        this.chooseCharacter(characters[0].characters);
 	      }
-	    };
+	    }.bind(this);
 
 	    request.send(null);
-	    chooseCharacter();
 	  },
 
-	  chooseCharacter: function chooseCharacter() {},
+	  chooseCharacter: function chooseCharacter(characters) {
+	    var chosenCharacter = characters[Math.floor(Math.random() * (characters.length - 1))];
+	    this.setState({ opponentCharacter: chosenCharacter });
+	  },
 
 	  render: function render() {
 	    return React.createElement(
@@ -19701,7 +19704,8 @@
 	        null,
 	        'Master Box'
 	      ),
-	      React.createElement(Grid, { characters: this.state.characters })
+	      React.createElement(Grid, { characters: this.state.characters }),
+	      'Guess who??'
 	    );
 	  }
 	});
@@ -19722,11 +19726,10 @@
 
 
 	  render: function render() {
-
-	    var cards = [1, 2, 3, 4, 5, 6];
+	    var cards = this.props.characters;
 
 	    var cardList = cards.map(function (card, index) {
-	      return React.createElement(Card, { character: this.props.character });
+	      return React.createElement(Card, { characteristics: card, key: index });
 	    }.bind(this));
 
 	    return React.createElement(
@@ -19743,17 +19746,34 @@
 /* 161 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(1);
 
 	var Card = React.createClass({
-	  displayName: 'Card',
+	  displayName: "Card",
 
+
+	  getInitialState: function getInitialState() {
+	    return { faceUp: true };
+	  },
 
 	  render: function render() {
 
-	    return React.createElement('div', null);
+	    var turnCard = function (event) {
+	      var picture = this.props.characteristics.imageUrl;
+	      var card = event.target;
+
+	      if (this.state.faceUp === true) {
+	        card.style.backgroundImage = "url('http://www.jimknapp.com/Cards/Non-Bicycle_files/image002.jpg')";
+	        this.setState({ faceUp: false });
+	      } else {
+	        card.style.backgroundImage = "url('" + picture + "')";
+	        this.setState({ faceUp: true });
+	      }
+	    }.bind(this);
+
+	    return React.createElement("div", { className: "card-box", style: { backgroundImage: "url('" + this.props.characteristics.imageUrl + "')", width: "100px", height: "150px", backgroundSize: "cover" }, onClick: turnCard });
 	  }
 	});
 

@@ -5,7 +5,7 @@ config = {
     path: "./build"
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json']
+    extensions: ['', '.js', '.jsx']
   },
   module:{
     loaders: [

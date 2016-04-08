@@ -2,3 +2,12 @@
   display: inline-block;
   margin: 20px;
 }
+
+select, button {
+  margin: 10px;
+}
+
+#answer {
+  font-weight: bold;
+  color: blue;
+}

@@ -6,7 +6,6 @@
          "hairColor": "brown",
          "glasses": false,
          "imageUrl": "rick.jpg"
-
       },
       {
          "name": "Keith",
@@ -27,25 +26,28 @@
          "gender": "f",
          "hairColor": "purple",
          "glasses": true,
-         "imageUrl": "beth.jpg"   
+         "imageUrl": "val.jpg"   
       },
       {
          "name": "Jay",
          "gender": "m",
          "hairColor": "brown",
-         "glasses": false  
+         "glasses": false,
+         "imageUrl": "jay.jpg"    
       },
       {
          "name": "Sandy",
          "gender": "m",
          "hairColor": "black",
-         "glasses": true  
+         "glasses": true,
+         "imageUrl": "sandy.jpg"    
       },
       {
          "name": "Leigh-Anne",
          "gender": "f",
          "hairColor": "blonde",
-         "glasses": true  
+         "glasses": true,
+         "imageUrl": "leigh-anne.jpg"    
       }
    ]
 }

@@ -4,8 +4,13 @@ var GuessBox = React.createClass({
 
   buttonClick: function(e){
     var chosenCharacter = document.getElementById("guessCharacter").value;
-    
-    console.log(chosenCharacter)
+
+    if(this.props.winChecker.checkForWin(chosenCharacter, this.props.opponentCharacter)){
+        console.log("Win!!");
+    }
+    else{
+      console.log("Try AGAIN");
+    }
 
   },
 

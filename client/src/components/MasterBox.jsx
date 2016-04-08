@@ -1,6 +1,7 @@
 var React = require('react');
 var Grid = require('./Grid.jsx');
 var GuessBox = require('./GuessBox.jsx');
+var winChecker = require('../models/win_checker.js');
 
 var MasterBox = React.createClass({
 
@@ -33,7 +34,7 @@ var MasterBox = React.createClass({
       <h3>Master Box</h3>
       <Grid characters={this.state.characters}></Grid>
       Guess who??
-      <GuessBox characters={this.state.characters}></GuessBox>
+      <GuessBox characters={this.state.characters} winChecker={winChecker} opponentCharacter={this.state.opponentCharacter}></GuessBox>
       </div>
       );
   }

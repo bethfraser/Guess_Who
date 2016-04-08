@@ -1,0 +1,51 @@
+{
+   "characters": [
+      {
+         "name": "Rick",
+         "gender": "m",
+         "hairColor": "brown",
+         "glasses": false,
+         "imageUrl": "rick.jpg"
+
+      },
+      {
+         "name": "Keith",
+         "gender": "m",
+         "hairColor": "brown",
+         "glasses": false ,
+         "imageUrl": "keith.jpg" 
+      },
+      {
+         "name": "Beth",
+         "gender": "f",
+         "hairColor": "red",
+         "glasses": false,
+         "imageUrl": "beth.jpg" 
+      },
+      {
+         "name": "Valerie",
+         "gender": "f",
+         "hairColor": "purple",
+         "glasses": true,
+         "imageUrl": "beth.jpg"   
+      },
+      {
+         "name": "Jay",
+         "gender": "m",
+         "hairColor": "brown",
+         "glasses": false  
+      },
+      {
+         "name": "Sandy",
+         "gender": "m",
+         "hairColor": "black",
+         "glasses": true  
+      },
+      {
+         "name": "Leigh-Anne",
+         "gender": "f",
+         "hairColor": "blonde",
+         "glasses": true  
+      }
+   ]
+}

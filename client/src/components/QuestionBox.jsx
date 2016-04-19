@@ -21,14 +21,23 @@ var QuestionBox = React.createClass({
     var answer = document.getElementById("answer");
     answer.innerText = "";
 
+    var createOptions = function(options){
+      var optionString = "";
+      for(var option of options){
+        optionString += "<option value='" + option.toLowerCase() + "'>" + option + "</option>";
+
+      }
+      return optionString;
+    }
+
     if(selectedCharacteristic == "hairColor"){
-      optionSelect.innerHTML = "<option value='brown'>Brown</option><option value='blonde'>Blonde</option><option value='red'>Red</option><option value='black'>Black</option><option value='purple'>Purple</option>";  
+      optionSelect.innerHTML = createOptions(["Brown", "Blonde", "Red", "Black", "Purple"]); 
     }
     else if(selectedCharacteristic == "glasses"){
-      optionSelect.innerHTML = "<option value='true'>Yes</option><option value='false'>No</option>";
+      optionSelect.innerHTML = createOptions(["True", "False"]);
     }
     else if(selectedCharacteristic == "gender"){
-      optionSelect.innerHTML = "<option value='m'>Male</option><option value='f'>Female</option>";
+      optionSelect.innerHTML = createOptions(["M", "F"]);
     }
     else{
       optionSelect.innerHTML = "<option>Choose an option:</option>"

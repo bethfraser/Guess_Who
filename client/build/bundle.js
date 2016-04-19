@@ -19663,9 +19663,9 @@
 	
 	var React = __webpack_require__(1);
 	var Grid = __webpack_require__(160);
-	var QuestionBox = __webpack_require__(164);
-	var GuessBox = __webpack_require__(162);
-	var winChecker = __webpack_require__(163);
+	var QuestionBox = __webpack_require__(162);
+	var GuessBox = __webpack_require__(163);
+	var winChecker = __webpack_require__(164);
 	
 	var MasterBox = React.createClass({
 	  displayName: 'MasterBox',
@@ -19787,77 +19787,6 @@
 	
 	var React = __webpack_require__(1);
 	
-	var GuessBox = React.createClass({
-	  displayName: "GuessBox",
-	
-	
-	  buttonClick: function buttonClick(e) {
-	    var chosenCharacter = document.getElementById("guessCharacter").value;
-	    var winAnswer = document.getElementById("winAnswer");
-	
-	    if (this.props.winChecker.checkForWin(chosenCharacter, this.props.opponentCharacter)) {
-	      winAnswer.innerText = "You win!!";
-	    } else {
-	      winAnswer.innerText = "Wrong, try again.";
-	    }
-	  },
-	
-	  render: function render() {
-	
-	    var dropDownOptions = this.props.characters.map(function (character, index) {
-	      return React.createElement(
-	        "option",
-	        { value: character.name, key: index },
-	        character.name
-	      );
-	    });
-	
-	    return React.createElement(
-	      "div",
-	      null,
-	      React.createElement(
-	        "select",
-	        { id: "guessCharacter" },
-	        dropDownOptions
-	      ),
-	      React.createElement(
-	        "button",
-	        { onClick: this.buttonClick },
-	        "Guess!"
-	      ),
-	      React.createElement("span", { id: "winAnswer" })
-	    );
-	  }
-	});
-	
-	module.exports = GuessBox;
-
-/***/ },
-/* 163 */
-/***/ function(module, exports) {
-
-	"use strict";
-	
-	var winChecker = {
-	  checkForWin: function checkForWin(guessedName, chosenCharacter) {
-	    if (guessedName === chosenCharacter.name) {
-	      return true;
-	    }
-	    return false;
-	  }
-	
-	};
-	
-	module.exports = winChecker;
-
-/***/ },
-/* 164 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var React = __webpack_require__(1);
-	
 	var QuestionBox = React.createClass({
 	  displayName: "QuestionBox",
 	
@@ -19879,12 +19808,42 @@
 	    var answer = document.getElementById("answer");
 	    answer.innerText = "";
 	
+	    var createOptions = function createOptions(options) {
+	      var optionString = "";
+	      var _iteratorNormalCompletion = true;
+	      var _didIteratorError = false;
+	      var _iteratorError = undefined;
+	
+	      try {
+	        for (var _iterator = options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	          var option = _step.value;
+	
+	          optionString += "<option value='" + option.toLowerCase() + "'>" + option + "</option>";
+	        }
+	      } catch (err) {
+	        _didIteratorError = true;
+	        _iteratorError = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion && _iterator.return) {
+	            _iterator.return();
+	          }
+	        } finally {
+	          if (_didIteratorError) {
+	            throw _iteratorError;
+	          }
+	        }
+	      }
+	
+	      return optionString;
+	    };
+	
 	    if (selectedCharacteristic == "hairColor") {
-	      optionSelect.innerHTML = "<option value='brown'>Brown</option><option value='blonde'>Blonde</option><option value='red'>Red</option><option value='black'>Black</option><option value='purple'>Purple</option>";
+	      optionSelect.innerHTML = createOptions(["Brown", "Blonde", "Red", "Black", "Purple"]);
 	    } else if (selectedCharacteristic == "glasses") {
-	      optionSelect.innerHTML = "<option value='true'>Yes</option><option value='false'>No</option>";
+	      optionSelect.innerHTML = createOptions(["True", "False"]);
 	    } else if (selectedCharacteristic == "gender") {
-	      optionSelect.innerHTML = "<option value='m'>Male</option><option value='f'>Female</option>";
+	      optionSelect.innerHTML = createOptions(["M", "F"]);
 	    } else {
 	      optionSelect.innerHTML = "<option>Choose an option:</option>";
 	    }
@@ -19940,6 +19899,77 @@
 	});
 	
 	module.exports = QuestionBox;
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(1);
+	
+	var GuessBox = React.createClass({
+	  displayName: "GuessBox",
+	
+	
+	  buttonClick: function buttonClick(e) {
+	    var chosenCharacter = document.getElementById("guessCharacter").value;
+	    var winAnswer = document.getElementById("winAnswer");
+	
+	    if (this.props.winChecker.checkForWin(chosenCharacter, this.props.opponentCharacter)) {
+	      winAnswer.innerText = "You win!!";
+	    } else {
+	      winAnswer.innerText = "Wrong, try again.";
+	    }
+	  },
+	
+	  render: function render() {
+	
+	    var dropDownOptions = this.props.characters.map(function (character, index) {
+	      return React.createElement(
+	        "option",
+	        { value: character.name, key: index },
+	        character.name
+	      );
+	    });
+	
+	    return React.createElement(
+	      "div",
+	      null,
+	      React.createElement(
+	        "select",
+	        { id: "guessCharacter" },
+	        dropDownOptions
+	      ),
+	      React.createElement(
+	        "button",
+	        { onClick: this.buttonClick },
+	        "Guess!"
+	      ),
+	      React.createElement("span", { id: "winAnswer" })
+	    );
+	  }
+	});
+	
+	module.exports = GuessBox;
+
+/***/ },
+/* 164 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	var winChecker = {
+	  checkForWin: function checkForWin(guessedName, chosenCharacter) {
+	    if (guessedName === chosenCharacter.name) {
+	      return true;
+	    }
+	    return false;
+	  }
+	
+	};
+	
+	module.exports = winChecker;
 
 /***/ }
 /******/ ]);

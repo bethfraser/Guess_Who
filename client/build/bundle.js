@@ -19754,22 +19754,27 @@
 	    return { faceUp: true };
 	  },
 	
+	  turnCard: function turnCard(e) {
+	    var card = e.target.parentElement;
+	    if (card.className == "flipped") {
+	      card.className = "";
+	    } else {
+	      card.className = "flipped";
+	    }
+	  },
+	
 	  render: function render() {
 	
-	    var turnCard = function (event) {
-	      var picture = this.props.characteristics.imageUrl;
-	      var card = event.target;
-	
-	      if (this.state.faceUp === true) {
-	        card.style.backgroundImage = "url('http://www.jimknapp.com/Cards/Non-Bicycle_files/image002.jpg')";
-	        this.setState({ faceUp: false });
-	      } else {
-	        card.style.backgroundImage = "url('" + picture + "')";
-	        this.setState({ faceUp: true });
-	      }
-	    }.bind(this);
-	
-	    return React.createElement("div", { className: "card-box", style: { backgroundImage: "url('" + this.props.characteristics.imageUrl + "')", width: "100px", height: "150px", backgroundSize: "cover" }, onClick: turnCard });
+	    return React.createElement(
+	      "section",
+	      { className: "container" },
+	      React.createElement(
+	        "div",
+	        { id: "card", onClick: this.turnCard },
+	        React.createElement("figure", { className: "card-front", style: { backgroundImage: "url('" + this.props.characteristics.imageUrl + "')" } }),
+	        React.createElement("figure", { className: "card-back" })
+	      )
+	    );
 	  }
 	});
 	

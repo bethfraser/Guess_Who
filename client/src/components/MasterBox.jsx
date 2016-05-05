@@ -31,11 +31,11 @@ var MasterBox = React.createClass({
 
   render: function(){
     return(
-      <div>
-      <h3>Guess Who Game</h3>
-      <Grid characters={this.state.characters}></Grid>
-      <QuestionBox opponentCharacter={this.state.opponentCharacter}></QuestionBox>
-      <GuessBox characters={this.state.characters} winChecker={winChecker} opponentCharacter={this.state.opponentCharacter}></GuessBox>
+      <div className="main">
+        <img src="/images/logo.png"/>
+        <Grid characters={this.state.characters}></Grid>
+        <QuestionBox opponentCharacter={this.state.opponentCharacter}></QuestionBox>
+        <GuessBox characters={this.state.characters} winChecker={winChecker} opponentCharacter={this.state.opponentCharacter}></GuessBox>
       </div>
       );
   }

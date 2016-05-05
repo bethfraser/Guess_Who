@@ -19697,12 +19697,8 @@
 	  render: function render() {
 	    return React.createElement(
 	      'div',
-	      null,
-	      React.createElement(
-	        'h3',
-	        null,
-	        'Guess Who Game'
-	      ),
+	      { className: 'main' },
+	      React.createElement('img', { src: '/images/logo.png' }),
 	      React.createElement(Grid, { characters: this.state.characters }),
 	      React.createElement(QuestionBox, { opponentCharacter: this.state.opponentCharacter }),
 	      React.createElement(GuessBox, { characters: this.state.characters, winChecker: winChecker, opponentCharacter: this.state.opponentCharacter })
@@ -19936,6 +19932,7 @@
 	    return React.createElement(
 	      "div",
 	      null,
+	      "Make a Guess:",
 	      React.createElement(
 	        "select",
 	        { id: "guessCharacter" },

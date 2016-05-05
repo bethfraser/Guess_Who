@@ -1,6 +1,15 @@
+body {
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 18px;
+}
+
 .card-box {
   display: inline-block;
-  margin: 20px;
+  border: 1px solid grey;
+  box-shadow: 3px 3px 8px #939393;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 10px;
 }
 
 select, button {
@@ -10,4 +19,8 @@ select, button {
 #answer {
   font-weight: bold;
   color: blue;
+}
+
+.main {
+  text-align: center;
 }

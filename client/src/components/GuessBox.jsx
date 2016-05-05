@@ -25,6 +25,7 @@ var GuessBox = React.createClass({
 
     return(
       <div>
+      Make a Guess:
       <select id="guessCharacter">
       {dropDownOptions}
       </select>

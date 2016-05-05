@@ -19913,9 +19913,11 @@
 	    var winAnswer = document.getElementById("winAnswer");
 	
 	    if (this.props.winChecker.checkForWin(chosenCharacter, this.props.opponentCharacter)) {
-	      winAnswer.innerText = "You win!!";
+	      winAnswer.innerText = "Correct! You win!!";
+	      winAnswer.style.color = "#84c103";
 	    } else {
-	      winAnswer.innerText = "Wrong, try again.";
+	      winAnswer.innerText = "Wrong, you lose!";
+	      winAnswer.style.color = "#D50A1E";
 	    }
 	  },
 	
@@ -19931,7 +19933,7 @@
 	
 	    return React.createElement(
 	      "div",
-	      null,
+	      { id: "guessBox" },
 	      "Make a Guess:",
 	      React.createElement(
 	        "select",
@@ -19940,10 +19942,10 @@
 	      ),
 	      React.createElement(
 	        "button",
-	        { onClick: this.buttonClick },
+	        { className: "guessButton", onClick: this.buttonClick },
 	        "Guess!"
 	      ),
-	      React.createElement("span", { id: "winAnswer" })
+	      React.createElement("div", { id: "winAnswer" })
 	    );
 	  }
 	});

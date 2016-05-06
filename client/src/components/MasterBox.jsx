@@ -10,18 +10,22 @@ var MasterBox = React.createClass({
     return { characters: [], opponentCharacter: null, won: false };
   },
 
-  componentDidMount: function(){
-      var request = new XMLHttpRequest();
-      request.open('GET', this.props.url);
-      request.onload = function(){
-        if(request.status === 200){
-          var characters = JSON.parse(request.responseText);
-          this.setState({characters: characters[0].characters});
-          this.chooseCharacter(characters[0].characters);
-        }
-      }.bind(this);
+  sendHTTPRequest: function(url){
+    var request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.onload = function(){
+      if(request.status === 200){
+        var characters = JSON.parse(request.responseText);
+        this.setState({characters: characters[0].characters});
+        this.chooseCharacter(characters[0].characters);
+      }
+    }.bind(this);
 
-      request.send(null);
+    request.send(null);
+  },
+
+  componentDidMount: function(){
+    this.sendHTTPRequest(this.props.url);
   },
 
   chooseCharacter: function(characters){
@@ -29,10 +33,21 @@ var MasterBox = React.createClass({
     this.setState({opponentCharacter:chosenCharacter})
   },
 
+  changeDeck: function(){
+    console.log("deck change");
+    var selectedDeck = document.getElementById("deckSelect").value;
+    this.sendHTTPRequest("/api/characters/" + selectedDeck)
+  },
+
   render: function(){
     return(
       <div className="main">
-        <img src="/images/logo.png"/>
+        <img src="/images/logo.png"/><br /> 
+        Change deck: 
+        <select id="deckSelect" onChange={this.changeDeck}>
+        <option value="staff">CodeClan Staff</option>
+        <option value="lotr">Lord of The Rings</option>
+        </select>
         <Grid characters={this.state.characters}></Grid>
         <QuestionBox characters={this.state.characters} opponentCharacter={this.state.opponentCharacter}></QuestionBox>
         <GuessBox characters={this.state.characters} winChecker={winChecker} opponentCharacter={this.state.opponentCharacter}></GuessBox>

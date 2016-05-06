@@ -4,7 +4,7 @@ var MasterBox = require('./components/MasterBox.jsx');
 
 window.onload = function(){
   ReactDOM.render(
-    <MasterBox url='/api/characters'></MasterBox>,
+    <MasterBox url='/api/characters/staff'></MasterBox>,
     document.getElementById('app')
   );
 }

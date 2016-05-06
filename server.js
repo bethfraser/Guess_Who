@@ -2,14 +2,23 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var fs = require('fs');
-var CHARACTER_JSON = path.join(__dirname, 'data/staff.json');
+var STAFF_JSON = path.join(__dirname, 'data/staff.json');
+var LOTR_JSON = path.join(__dirname, 'data/lotr.json');
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
-app.get('/api/characters', function(req, res){
-  fs.readFile(CHARACTER_JSON, function(err, data){
+app.get('/api/characters/staff', function(req, res){
+  fs.readFile(STAFF_JSON, function(err, data){
+    if(err) process.exit(1);
+
+    res.json(JSON.parse(data));
+  })
+})
+
+app.get('/api/characters/lotr', function(req, res){
+  fs.readFile(LOTR_JSON, function(err, data){
     if(err) process.exit(1);
 
     res.json(JSON.parse(data));

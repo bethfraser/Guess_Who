@@ -51,7 +51,7 @@
 	var MasterBox = __webpack_require__(159);
 	
 	window.onload = function () {
-	  ReactDOM.render(React.createElement(MasterBox, { url: '/api/characters' }), document.getElementById('app'));
+	  ReactDOM.render(React.createElement(MasterBox, { url: '/api/characters/staff' }), document.getElementById('app'));
 	};
 
 /***/ },
@@ -19675,9 +19675,9 @@
 	    return { characters: [], opponentCharacter: null, won: false };
 	  },
 	
-	  componentDidMount: function componentDidMount() {
+	  sendHTTPRequest: function sendHTTPRequest(url) {
 	    var request = new XMLHttpRequest();
-	    request.open('GET', this.props.url);
+	    request.open('GET', url);
 	    request.onload = function () {
 	      if (request.status === 200) {
 	        var characters = JSON.parse(request.responseText);
@@ -19689,9 +19689,19 @@
 	    request.send(null);
 	  },
 	
+	  componentDidMount: function componentDidMount() {
+	    this.sendHTTPRequest(this.props.url);
+	  },
+	
 	  chooseCharacter: function chooseCharacter(characters) {
 	    var chosenCharacter = characters[Math.floor(Math.random() * (characters.length - 1))];
 	    this.setState({ opponentCharacter: chosenCharacter });
+	  },
+	
+	  changeDeck: function changeDeck() {
+	    console.log("deck change");
+	    var selectedDeck = document.getElementById("deckSelect").value;
+	    this.sendHTTPRequest("/api/characters/" + selectedDeck);
 	  },
 	
 	  render: function render() {
@@ -19699,6 +19709,22 @@
 	      'div',
 	      { className: 'main' },
 	      React.createElement('img', { src: '/images/logo.png' }),
+	      React.createElement('br', null),
+	      'Change deck:',
+	      React.createElement(
+	        'select',
+	        { id: 'deckSelect', onChange: this.changeDeck },
+	        React.createElement(
+	          'option',
+	          { value: 'staff' },
+	          'CodeClan Staff'
+	        ),
+	        React.createElement(
+	          'option',
+	          { value: 'lotr' },
+	          'Lord of The Rings'
+	        )
+	      ),
 	      React.createElement(Grid, { characters: this.state.characters }),
 	      React.createElement(QuestionBox, { characters: this.state.characters, opponentCharacter: this.state.opponentCharacter }),
 	      React.createElement(GuessBox, { characters: this.state.characters, winChecker: winChecker, opponentCharacter: this.state.opponentCharacter })

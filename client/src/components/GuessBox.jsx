@@ -21,7 +21,7 @@ var GuessBox = React.createClass({
 
     var dropDownOptions = this.props.characters.map(function(character, index){
       return(
-        <option value={character.name} key={index}>{character.name}</option>
+        <option value={character.Name} key={index}>{character.Name}</option>
         )
     });
 

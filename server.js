@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var fs = require('fs');
-var CHARACTER_JSON = path.join(__dirname, 'data/characters.json');
+var CHARACTER_JSON = path.join(__dirname, 'data/staff.json');
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/client/build/index.html'));

@@ -34,7 +34,7 @@ var MasterBox = React.createClass({
       <div className="main">
         <img src="/images/logo.png"/>
         <Grid characters={this.state.characters}></Grid>
-        <QuestionBox opponentCharacter={this.state.opponentCharacter}></QuestionBox>
+        <QuestionBox characters={this.state.characters} opponentCharacter={this.state.opponentCharacter}></QuestionBox>
         <GuessBox characters={this.state.characters} winChecker={winChecker} opponentCharacter={this.state.opponentCharacter}></GuessBox>
       </div>
       );

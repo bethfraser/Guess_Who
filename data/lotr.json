@@ -1,0 +1,86 @@
+[{
+   "characters": [
+      {
+         "Name": "Frodo",
+         "Gender": "Male",
+         "Hair": "Brown",
+         "Race": "Hobbit",
+         "Weapon": "Sting",
+         "Ringbearer": "True",
+         "imageUrl": "/images/lotr/frodo.png"
+      },
+      {
+         "Name": "Sam",
+         "Gender": "Male",
+         "Hair": "Blonde",
+         "Race": "Hobbit",
+         "Weapon": "Barrow-blade",
+         "Ringbearer": "True",
+         "imageUrl": "/images/lotr/sam.jpg"
+      },
+      {
+         "Name": "Merry",
+         "Gender": "Male",
+         "Hair": "Blonde",
+         "Race": "Hobbit",
+         "Weapon": "Barrow-blade",
+         "Ringbearer": "False",
+         "imageUrl": "/images/lotr/merry.jpg"
+      },
+      {
+         "Name": "Pippin",
+         "Gender": "Male",
+         "Hair": "Brown",
+         "Race": "Hobbit",
+         "Weapon": "Barrow-blade",
+         "Ringbearer": "False",
+         "imageUrl": "/images/lotr/pippin.jpg"
+      },
+      {
+         "Name": "Gandalf",
+         "Gender": "Male",
+         "Hair": "Grey",
+         "Race": "Wizard",
+         "Weapon": "Staff",
+         "Ringbearer": "True",
+         "imageUrl": "/images/lotr/gandalf.jpg"
+      },
+      {
+         "Name": "Boromir",
+         "Gender": "Male",
+         "Hair": "Brown",
+         "Race": "Human",
+         "Weapon": "Sword",
+         "Ringbearer": "True",
+         "imageUrl": "/images/lotr/boromir.jpg"
+      },
+      {
+         "Name": "Aragorn",
+         "Gender": "Male",
+         "Hair": "Brown",
+         "Race": "Human",
+         "Weapon": "Sword",
+         "Ringbearer": "False",
+         "imageUrl": "/images/lotr/aragorn.jpg"
+      },
+      {
+         "Name": "Legolas",
+         "Gender": "Male",
+         "Hair": "Blonde",
+         "Race": "Elf",
+         "Weapon": "Bow",
+         "Ringbearer": "False",
+         "imageUrl": "/images/lotr/legolas.jpg"
+      },
+      {
+         "Name": "Gimli",
+         "Gender": "Male",
+         "Hair": "Red",
+         "Race": "Dwarf",
+         "Weapon": "Axe",
+         "Ringbearer": "False",
+         "imageUrl": "/images/lotr/gimli.jpg"
+      }
+
+   ]
+}]

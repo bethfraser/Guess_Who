@@ -19700,7 +19700,7 @@
 	      { className: 'main' },
 	      React.createElement('img', { src: '/images/logo.png' }),
 	      React.createElement(Grid, { characters: this.state.characters }),
-	      React.createElement(QuestionBox, { opponentCharacter: this.state.opponentCharacter }),
+	      React.createElement(QuestionBox, { characters: this.state.characters, opponentCharacter: this.state.opponentCharacter }),
 	      React.createElement(GuessBox, { characters: this.state.characters, winChecker: winChecker, opponentCharacter: this.state.opponentCharacter })
 	    );
 	  }
@@ -19798,28 +19798,33 @@
 	    var answer = document.getElementById("answer");
 	    if (chosenOption === String(this.props.opponentCharacter[chosenCharacteristic])) {
 	      answer.innerText = "Yes!";
+	      answer.style.color = "#84c103";
 	    } else {
 	      answer.innerText = "No.";
+	      answer.style.color = "#D50A1E";
 	    }
 	  },
 	
-	  populateSelectOptions: function populateSelectOptions() {
+	  populateSelectOptions: function populateSelectOptions(event) {
+	
 	    var selectedCharacteristic = document.getElementById("questionSelect").value;
 	    var optionSelect = document.getElementById("optionSelect");
 	    var answer = document.getElementById("answer");
 	    answer.innerText = "";
 	
-	    var createOptions = function createOptions(options) {
-	      var optionString = "";
+	    var getOptions = function (option) {
+	      var optionList = [];
 	      var _iteratorNormalCompletion = true;
 	      var _didIteratorError = false;
 	      var _iteratorError = undefined;
 	
 	      try {
-	        for (var _iterator = options[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	          var option = _step.value;
+	        for (var _iterator = this.props.characters[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	          var character = _step.value;
 	
-	          optionString += "<option value='" + option.toLowerCase() + "'>" + option + "</option>";
+	          if (!optionList.includes(character[option])) {
+	            optionList.push(character[option]);
+	          }
 	        }
 	      } catch (err) {
 	        _didIteratorError = true;
@@ -19836,21 +19841,64 @@
 	        }
 	      }
 	
-	      return optionString;
-	    };
+	      var optionString = "";
+	      var _iteratorNormalCompletion2 = true;
+	      var _didIteratorError2 = false;
+	      var _iteratorError2 = undefined;
 	
-	    if (selectedCharacteristic == "hairColor") {
-	      optionSelect.innerHTML = createOptions(["Brown", "Blonde", "Red", "Black", "Purple"]);
-	    } else if (selectedCharacteristic == "glasses") {
-	      optionSelect.innerHTML = createOptions(["True", "False"]);
-	    } else if (selectedCharacteristic == "gender") {
-	      optionSelect.innerHTML = createOptions(["M", "F"]);
-	    } else {
+	      try {
+	        for (var _iterator2 = optionList[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	          var option = _step2.value;
+	
+	          optionString += "<option value='" + option + "'>" + option + "</option>";
+	        }
+	      } catch (err) {
+	        _didIteratorError2 = true;
+	        _iteratorError2 = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+	            _iterator2.return();
+	          }
+	        } finally {
+	          if (_didIteratorError2) {
+	            throw _iteratorError2;
+	          }
+	        }
+	      }
+	
+	      return optionString;
+	    }.bind(this);
+	
+	    if (selectedCharacteristic == "Choose characteristic:") {
 	      optionSelect.innerHTML = "<option>Choose an option:</option>";
+	    } else {
+	      optionSelect.innerHTML = getOptions(selectedCharacteristic);
 	    }
 	  },
 	
+	  getProperties: function getProperties(obj) {
+	    var keys = [];
+	    for (var key in obj) {
+	      keys.push(key);
+	    }
+	    return keys;
+	  },
+	
 	  render: function render() {
+	
+	    var properties = this.getProperties(this.props.characters[0]);
+	    var propertyOptions = properties.map(function (property, index) {
+	
+	      if (property == "imageUrl" || property == "Name") {
+	        return;
+	      }
+	      return React.createElement(
+	        "option",
+	        { value: property, key: index },
+	        property
+	      );
+	    });
 	
 	    return React.createElement(
 	      "div",
@@ -19864,21 +19912,7 @@
 	          null,
 	          "Choose characteristic:"
 	        ),
-	        React.createElement(
-	          "option",
-	          { value: "hairColor" },
-	          "Hair colour"
-	        ),
-	        React.createElement(
-	          "option",
-	          { value: "glasses" },
-	          "Glasses"
-	        ),
-	        React.createElement(
-	          "option",
-	          { value: "gender" },
-	          "Gender"
-	        )
+	        propertyOptions
 	      ),
 	      React.createElement(
 	        "select",
@@ -19931,8 +19965,8 @@
 	    var dropDownOptions = this.props.characters.map(function (character, index) {
 	      return React.createElement(
 	        "option",
-	        { value: character.name, key: index },
-	        character.name
+	        { value: character.Name, key: index },
+	        character.Name
 	      );
 	    });
 	

@@ -19699,7 +19699,6 @@
 	  },
 	
 	  changeDeck: function changeDeck() {
-	    console.log("deck change");
 	    var selectedDeck = document.getElementById("deckSelect").value;
 	    this.sendHTTPRequest("/api/characters/" + selectedDeck);
 	  },
@@ -19783,7 +19782,7 @@
 	  turnCard: function turnCard(e) {
 	    var card = e.target.parentElement;
 	    if (card.className == "flipped") {
-	      card.className = "";
+	      card.className = "unflipped";
 	    } else {
 	      card.className = "flipped";
 	    }
@@ -19796,7 +19795,7 @@
 	      { className: "container" },
 	      React.createElement(
 	        "div",
-	        { id: "card", onClick: this.turnCard },
+	        { id: "card", className: "unflipped", onClick: this.turnCard },
 	        React.createElement("figure", { className: "card-front", style: { backgroundImage: "url('" + this.props.characteristics.imageUrl + "')" } }),
 	        React.createElement("figure", { className: "card-back" })
 	      )

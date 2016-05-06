@@ -9,21 +9,22 @@ var Card = React.createClass({
   turnCard: function(e){
     var card = e.target.parentElement;
     if(card.className == "flipped"){
-      card.className = "";
+      card.className = "unflipped";
     }else{
-    card.className = "flipped";
+      card.className = "flipped";
     }
   },
 
   render: function(){
-  
+
+
     return(
 
       <section className="container">
-        <div id="card" onClick={this.turnCard}>
-          <figure className="card-front" style={{backgroundImage: "url('" + this.props.characteristics.imageUrl + "')"}}></figure>
-          <figure className="card-back"></figure>
-        </div>
+      <div id="card" className="unflipped" onClick={this.turnCard}>
+      <figure className="card-front" style={{backgroundImage: "url('" + this.props.characteristics.imageUrl + "')"}}></figure>
+      <figure className="card-back"></figure>
+      </div>
       </section>
 
       )

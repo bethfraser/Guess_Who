@@ -34,7 +34,6 @@ var MasterBox = React.createClass({
   },
 
   changeDeck: function(){
-    console.log("deck change");
     var selectedDeck = document.getElementById("deckSelect").value;
     this.sendHTTPRequest("/api/characters/" + selectedDeck)
   },

@@ -1,6 +1,6 @@
 var winChecker = {
   checkForWin: function(guessedName, chosenCharacter){
-    if(guessedName === chosenCharacter.name){
+    if(guessedName === chosenCharacter.Name){
       return true;
     }
     return false;

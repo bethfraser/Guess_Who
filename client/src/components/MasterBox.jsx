@@ -46,6 +46,7 @@ var MasterBox = React.createClass({
         <select id="deckSelect" onChange={this.changeDeck}>
         <option value="staff">CodeClan Staff</option>
         <option value="lotr">Lord of The Rings</option>
+        <option value="hp">Harry Potter</option>
         </select>
         <Grid characters={this.state.characters}></Grid>
         <QuestionBox characters={this.state.characters} opponentCharacter={this.state.opponentCharacter}></QuestionBox>

@@ -19722,6 +19722,11 @@
 	          'option',
 	          { value: 'lotr' },
 	          'Lord of The Rings'
+	        ),
+	        React.createElement(
+	          'option',
+	          { value: 'hp' },
+	          'Harry Potter'
 	        )
 	      ),
 	      React.createElement(Grid, { characters: this.state.characters }),

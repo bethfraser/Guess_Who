@@ -8,7 +8,7 @@ var Grid = React.createClass({
 
     var cardList = cards.map(function(card, index){
       return(
-        <Card characteristics={card} key={index}></Card>
+        <Card characteristics={card} key={index}  index={index} onFlip={this.props.onFlip}></Card>
         )
     }.bind(this))
 

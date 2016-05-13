@@ -219,6 +219,9 @@
 	var queueIndex = -1;
 	
 	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
 	    draining = false;
 	    if (currentQueue.length) {
 	        queue = currentQueue.concat(queue);
@@ -7953,6 +7956,10 @@
 	  }
 	};
 	
+	function registerNullComponentID() {
+	  ReactEmptyComponentRegistry.registerNullComponentID(this._rootNodeID);
+	}
+	
 	var ReactEmptyComponent = function (instantiate) {
 	  this._currentElement = null;
 	  this._rootNodeID = null;
@@ -7961,7 +7968,7 @@
 	assign(ReactEmptyComponent.prototype, {
 	  construct: function (element) {},
 	  mountComponent: function (rootID, transaction, context) {
-	    ReactEmptyComponentRegistry.registerNullComponentID(rootID);
+	    transaction.getReactMountReady().enqueue(registerNullComponentID, this);
 	    this._rootNodeID = rootID;
 	    return ReactReconciler.mountComponent(this._renderedComponent, rootID, transaction, context);
 	  },
@@ -18684,7 +18691,7 @@
 	
 	'use strict';
 	
-	module.exports = '0.14.7';
+	module.exports = '0.14.8';
 
 /***/ },
 /* 147 */
@@ -19698,6 +19705,18 @@
 	    this.setState({ opponentCharacter: chosenCharacter });
 	  },
 	
+	  flipCharacter: function flipCharacter(indexToFlip) {
+	    var updatedCharacters = this.state.characters.map(function (character, index) {
+	      if (index === indexToFlip) {
+	        var newCharacter = Object.assign({}, character, { flipped: !character.flipped });
+	        return newCharacter;
+	      } else {
+	        return character;
+	      }
+	    });
+	    this.setState({ characters: updatedCharacters });
+	  },
+	
 	  changeDeck: function changeDeck() {
 	    var selectedDeck = document.getElementById("deckSelect").value;
 	    this.sendHTTPRequest("/api/characters/" + selectedDeck);
@@ -19729,7 +19748,7 @@
 	          'Harry Potter'
 	        )
 	      ),
-	      React.createElement(Grid, { characters: this.state.characters }),
+	      React.createElement(Grid, { characters: this.state.characters, onFlip: this.flipCharacter }),
 	      React.createElement(QuestionBox, { characters: this.state.characters, opponentCharacter: this.state.opponentCharacter }),
 	      React.createElement(GuessBox, { characters: this.state.characters, winChecker: winChecker, opponentCharacter: this.state.opponentCharacter })
 	    );
@@ -19755,7 +19774,7 @@
 	    var cards = this.props.characters;
 	
 	    var cardList = cards.map(function (card, index) {
-	      return React.createElement(Card, { characteristics: card, key: index });
+	      return React.createElement(Card, { characteristics: card, key: index, index: index, onFlip: this.props.onFlip });
 	    }.bind(this));
 	
 	    return React.createElement(
@@ -19780,27 +19799,21 @@
 	  displayName: "Card",
 	
 	
-	  getInitialState: function getInitialState() {
-	    return { faceUp: true };
-	  },
-	
-	  turnCard: function turnCard(e) {
-	    var card = e.target.parentElement;
-	    if (card.className == "flipped") {
-	      card.className = "unflipped";
-	    } else {
-	      card.className = "flipped";
-	    }
+	  handleFlip: function handleFlip() {
+	    this.props.onFlip(this.props.index);
 	  },
 	
 	  render: function render() {
-	
+	    var classes = "unflipped";
+	    if (this.props.characteristics.flipped) {
+	      classes = "flipped";
+	    }
 	    return React.createElement(
 	      "section",
 	      { className: "container" },
 	      React.createElement(
 	        "div",
-	        { id: "card", className: "unflipped", onClick: this.turnCard },
+	        { id: "card", className: classes, onClick: this.handleFlip },
 	        React.createElement("figure", { className: "card-front", style: { backgroundImage: "url('" + this.props.characteristics.imageUrl + "')" } }),
 	        React.createElement("figure", { className: "card-back" })
 	      )

@@ -16,62 +16,56 @@ var QuestionBox = React.createClass({
     }
   },
 
-
   populateSelectOptions: function(event){
-
     var selectedCharacteristic = document.getElementById("questionSelect").value;
     var optionSelect = document.getElementById("optionSelect");
     var answer = document.getElementById("answer");
     answer.innerText = "";
 
     var getOptions = function(option){
-       var optionList = [];
-       for(var character of this.props.characters){
-          if(!optionList.includes(character[option])){
-          optionList.push(character[option]);
-        }
-       }
-
-       var optionString = "";
-       for(var option of optionList){
-         optionString += "<option value='" + option + "'>" + option + "</option>";
-
-       }
-       return optionString;
-    }.bind(this);
-
-    if(selectedCharacteristic == "Choose characteristic:"){
-    optionSelect.innerHTML = "<option>Choose an option:</option>"
-    }
-    else {
-    optionSelect.innerHTML = getOptions(selectedCharacteristic);
+     var optionList = [];
+     for(var character of this.props.characters){
+      if(!optionList.includes(character[option])){
+        optionList.push(character[option]);
+      }
     }
 
-  },
-
-  getProperties: function(obj){
-    var keys = [];
-    for(var key in obj){
-     keys.push(key);
+    var optionString = "";
+    for(var option of optionList){
+     optionString += "<option value='" + option + "'>" + option + "</option>";
    }
-   return keys;
- },
+   return optionString;
+ }.bind(this);
 
- render: function(){
+ if(selectedCharacteristic == "Choose characteristic:"){
+  optionSelect.innerHTML = "<option>Choose an option:</option>"
+}
+else {
+  optionSelect.innerHTML = getOptions(selectedCharacteristic);
+}
+
+},
+
+getProperties: function(obj){
+  var keys = [];
+  for(var key in obj){
+   keys.push(key);
+ }
+ return keys;
+},
+
+render: function(){
 
 
   var properties = this.getProperties(this.props.characters[0]);
   var propertyOptions = properties.map(function(property, index){
-
-    if(property == "imageUrl" || property == "Name"){
+    if(property == "imageUrl" || property == "Name" || property == "flipped"){
       return
     }
     return(
       <option value={property} key={index}>{property}</option>
       )
   });
-
-
 
   return(
     <div>

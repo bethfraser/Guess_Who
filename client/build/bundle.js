@@ -219,9 +219,6 @@
 	var queueIndex = -1;
 	
 	function cleanUpNextTick() {
-	    if (!draining || !currentQueue) {
-	        return;
-	    }
 	    draining = false;
 	    if (currentQueue.length) {
 	        queue = currentQueue.concat(queue);
@@ -7956,10 +7953,6 @@
 	  }
 	};
 	
-	function registerNullComponentID() {
-	  ReactEmptyComponentRegistry.registerNullComponentID(this._rootNodeID);
-	}
-	
 	var ReactEmptyComponent = function (instantiate) {
 	  this._currentElement = null;
 	  this._rootNodeID = null;
@@ -7968,7 +7961,7 @@
 	assign(ReactEmptyComponent.prototype, {
 	  construct: function (element) {},
 	  mountComponent: function (rootID, transaction, context) {
-	    transaction.getReactMountReady().enqueue(registerNullComponentID, this);
+	    ReactEmptyComponentRegistry.registerNullComponentID(rootID);
 	    this._rootNodeID = rootID;
 	    return ReactReconciler.mountComponent(this._renderedComponent, rootID, transaction, context);
 	  },
@@ -18691,7 +18684,7 @@
 	
 	'use strict';
 	
-	module.exports = '0.14.8';
+	module.exports = '0.14.7';
 
 /***/ },
 /* 147 */
@@ -19849,7 +19842,6 @@
 	  },
 	
 	  populateSelectOptions: function populateSelectOptions(event) {
-	
 	    var selectedCharacteristic = document.getElementById("questionSelect").value;
 	    var optionSelect = document.getElementById("optionSelect");
 	    var answer = document.getElementById("answer");
@@ -19932,8 +19924,7 @@
 	
 	    var properties = this.getProperties(this.props.characters[0]);
 	    var propertyOptions = properties.map(function (property, index) {
-	
-	      if (property == "imageUrl" || property == "Name") {
+	      if (property == "imageUrl" || property == "Name" || property == "flipped") {
 	        return;
 	      }
 	      return React.createElement(
@@ -20047,7 +20038,6 @@
 	    }
 	    return false;
 	  }
-	
 	};
 	
 	module.exports = winChecker;

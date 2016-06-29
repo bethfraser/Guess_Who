@@ -5,7 +5,6 @@ var winChecker = {
     }
     return false;
   }
-
 }
 
 module.exports = winChecker;

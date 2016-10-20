@@ -16,8 +16,8 @@ var MasterBox = React.createClass({
     request.onload = function(){
       if(request.status === 200){
         var characters = JSON.parse(request.responseText);
-        this.setState({characters: characters[0].characters});
-        this.chooseCharacter(characters[0].characters);
+        this.setState({characters: characters});
+        this.chooseCharacter(characters);
       }
     }.bind(this);
 
@@ -47,7 +47,7 @@ var MasterBox = React.createClass({
 
   changeDeck: function(){
     var selectedDeck = document.getElementById("deckSelect").value;
-    this.sendHTTPRequest("/api/characters/" + selectedDeck)
+    this.sendHTTPRequest(selectedDeck)
   },
 
   render: function(){
@@ -56,9 +56,9 @@ var MasterBox = React.createClass({
         <img src="/images/logo.png"/><br />
         Change deck:
         <select id="deckSelect" onChange={this.changeDeck}>
-          <option value="staff">CodeClan Staff</option>
-          <option value="lotr">Lord of The Rings</option>
-          <option value="hp">Harry Potter</option>
+          <option value="/api/characters/staff">CodeClan Staff</option>
+          <option value="/api/characters/lotr">Lord of The Rings</option>
+          <option value="http://hp-api.herokuapp.com/api/characters">Harry Potter</option>
         </select>
         <Grid characters={this.state.characters} onFlip={this.flipCharacter}></Grid>
         <QuestionBox characters={this.state.characters} opponentCharacter={this.state.opponentCharacter}></QuestionBox>

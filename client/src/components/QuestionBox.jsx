@@ -25,7 +25,7 @@ var QuestionBox = React.createClass({
     var getOptions = function(option){
      var optionList = [];
      for(var character of this.props.characters){
-      if(!optionList.includes(character[option])){
+      if(!optionList.includes(character[option]) && character[option] != ""){
         optionList.push(character[option]);
       }
     }
@@ -59,7 +59,7 @@ render: function(){
 
   var properties = this.getProperties(this.props.characters[0]);
   var propertyOptions = properties.map(function(property, index){
-    if(property == "imageUrl" || property == "Name" || property == "flipped"){
+    if(property == "image" || property == "name" || property == "flipped"){
       return
     }
     return(

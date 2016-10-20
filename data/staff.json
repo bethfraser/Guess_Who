@@ -1,53 +1,51 @@
-[{
-   "characters": [
+[
       {
-         "Name": "Rick",
+         "name": "Rick",
          "Gender": "Male",
          "Hair": "Blonde",
          "Glasses": "False",
-         "imageUrl": "/images/staff/rick.jpg"
+         "image": "/images/staff/rick.jpg"
       },
       {
-         "Name": "Keith",
+         "name": "Keith",
          "Gender": "Male",
          "Hair": "Brown",
          "Glasses": "False" ,
-         "imageUrl": "/images/staff/keith.jpg" 
+         "image": "/images/staff/keith.jpg" 
       },
       {
-         "Name": "Beth",
+         "name": "Beth",
          "Gender": "Female",
          "Hair": "Red",
          "Glasses": "False",
-         "imageUrl": "/images/staff/beth.jpg" 
+         "image": "/images/staff/beth.jpg" 
       },
       {
-         "Name": "Valerie",
+         "name": "Valerie",
          "Gender": "Female",
          "Hair": "Purple",
          "Glasses": "True",
-         "imageUrl": "/images/staff/val.jpg"   
+         "image": "/images/staff/val.jpg"   
       },
       {
-         "Name": "Jay",
+         "name": "Jay",
          "Gender": "Male",
          "Hair": "Black",
          "Glasses": "False",
-         "imageUrl": "/images/staff/jay.jpg"    
+         "image": "/images/staff/jay.jpg"    
       },
       {
-         "Name": "Sandy",
+         "name": "Sandy",
          "Gender": "Male",
          "Hair": "Black",
          "Glasses": "True",
-         "imageUrl": "/images/staff/sandy.jpg"    
+         "image": "/images/staff/sandy.jpg"    
       },
       {
-         "Name": "Leigh-Ann",
+         "name": "Leigh-Ann",
          "Gender": "Female",
          "Hair": "Blonde",
          "Glasses": "True",
-         "imageUrl": "/images/staff/leigh-ann.jpg"    
+         "image": "/images/staff/leigh-ann.jpg"    
       }
    ]
-}]

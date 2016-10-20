@@ -19681,8 +19681,8 @@
 	    request.onload = function () {
 	      if (request.status === 200) {
 	        var characters = JSON.parse(request.responseText);
-	        this.setState({ characters: characters[0].characters });
-	        this.chooseCharacter(characters[0].characters);
+	        this.setState({ characters: characters });
+	        this.chooseCharacter(characters);
 	      }
 	    }.bind(this);
 	
@@ -19712,7 +19712,7 @@
 	
 	  changeDeck: function changeDeck() {
 	    var selectedDeck = document.getElementById("deckSelect").value;
-	    this.sendHTTPRequest("/api/characters/" + selectedDeck);
+	    this.sendHTTPRequest(selectedDeck);
 	  },
 	
 	  render: function render() {
@@ -19727,17 +19727,17 @@
 	        { id: 'deckSelect', onChange: this.changeDeck },
 	        React.createElement(
 	          'option',
-	          { value: 'staff' },
+	          { value: '/api/characters/staff' },
 	          'CodeClan Staff'
 	        ),
 	        React.createElement(
 	          'option',
-	          { value: 'lotr' },
+	          { value: '/api/characters/lotr' },
 	          'Lord of The Rings'
 	        ),
 	        React.createElement(
 	          'option',
-	          { value: 'hp' },
+	          { value: 'http://hp-api.herokuapp.com/api/characters' },
 	          'Harry Potter'
 	        )
 	      ),
@@ -19807,7 +19807,7 @@
 	      React.createElement(
 	        "div",
 	        { id: "card", className: classes, onClick: this.handleFlip },
-	        React.createElement("figure", { className: "card-front", style: { backgroundImage: "url('" + this.props.characteristics.imageUrl + "')" } }),
+	        React.createElement("figure", { className: "card-front", style: { backgroundImage: "url('" + this.props.characteristics.image + "')" } }),
 	        React.createElement("figure", { className: "card-back" })
 	      )
 	    );
@@ -19857,7 +19857,7 @@
 	        for (var _iterator = this.props.characters[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 	          var character = _step.value;
 	
-	          if (!optionList.includes(character[option])) {
+	          if (!optionList.includes(character[option]) && character[option] != "") {
 	            optionList.push(character[option]);
 	          }
 	        }
@@ -19924,7 +19924,7 @@
 	
 	    var properties = this.getProperties(this.props.characters[0]);
 	    var propertyOptions = properties.map(function (property, index) {
-	      if (property == "imageUrl" || property == "Name" || property == "flipped") {
+	      if (property == "image" || property == "name" || property == "flipped") {
 	        return;
 	      }
 	      return React.createElement(
@@ -19999,8 +19999,8 @@
 	    var dropDownOptions = this.props.characters.map(function (character, index) {
 	      return React.createElement(
 	        "option",
-	        { value: character.Name, key: index },
-	        character.Name
+	        { value: character.name, key: index },
+	        character.name
 	      );
 	    });
 	
@@ -20033,7 +20033,7 @@
 	
 	var winChecker = {
 	  checkForWin: function checkForWin(guessedName, chosenCharacter) {
-	    if (guessedName === chosenCharacter.Name) {
+	    if (guessedName === chosenCharacter.name) {
 	      return true;
 	    }
 	    return false;

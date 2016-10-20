@@ -7,7 +7,7 @@ var LOTR_JSON = path.join(__dirname, 'data/lotr.json');
 var HP_JSON = path.join(__dirname, 'data/hp.json');
 
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+  res.sendFile(path.join(__dirname + '/index.html'));
 });
 
 app.get('/api/characters/staff', function(req, res){

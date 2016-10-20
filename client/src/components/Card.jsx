@@ -14,7 +14,7 @@ var Card = React.createClass({
     return(
       <section className="container">
       <div id="card" className={classes} onClick={this.handleFlip}>
-      <figure className="card-front" style={{backgroundImage: "url('" + this.props.characteristics.imageUrl + "')"}}></figure>
+      <figure className="card-front" style={{backgroundImage: "url('" + this.props.characteristics.image + "')"}}></figure>
       <figure className="card-back"></figure>
       </div>
       </section>
